@@ -12,21 +12,18 @@ configure :development do
 end
 
 # db file path
-db_file_path = File.join(File.dirname(__FILE__), "data/posts_spec.db")
+db_file_path = File.join(File.dirname(__FILE__), "data/jukebox.sqlite")
 
 # create a database instance
 DB = SQLite3::Database.new(db_file_path)
 
 # Views
 get '/' do
-  erb :index # view
+  @artists = DB.execute("SELECT name FROM artists LIMIT 20")
+  erb :index
 end
 
-get '/about'do
-  erb :about
-end
-
-get '/team/:username' do
-  puts params[:username]
-  "The username is #{params[:username]}"
+get '/artists/:id' do
+  # binding.pry => params[:id]
+  erb :artist
 end

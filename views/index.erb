@@ -1,2 +1,11 @@
-<h1>Hello World</h1>
-<p> The time now is <%= Time.now %> </p>
+<h1>Home Page</h1>
+<h2>List of Artists</h2>
+<ul>
+  <% @artists.each do |artist| %>
+    <li>
+      <a href="artists/<%= artist[0] %>">
+        <%= artist[0] %>
+      </a>
+    </li>
+  <% end %>
+</ul>
