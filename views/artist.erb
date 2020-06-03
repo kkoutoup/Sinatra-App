@@ -23,8 +23,8 @@
 <ol>
   <% @artist_albums.each do |album| %>
     <li>
-      <a href="artists/<%= album %>">
-        <%= album %>
+      <a href="/albums/<%= album[1] %>">
+        <%= album[0] %>
       </a>
     </li>
   <% end %>
