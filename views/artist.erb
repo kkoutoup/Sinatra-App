@@ -1,9 +1,9 @@
-<h1><%= params[:id] %></h1>
-<p>Album list</p>
+<h1> <%= @artist_name %></h1>
+<p>Quick Facts</p>
+<hr>
+<p>Album count: <%= @albums_count %></p>
+<p>Song count: <%= @songs_count %></p>
+<h3>Album list</h3>
 <ul>
-  <% @albums.each do |album|%>
-    <li>
-      <%= album %>
-    </li>
-  <% end %>
+  
 </ul>
