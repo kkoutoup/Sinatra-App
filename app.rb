@@ -19,11 +19,14 @@ DB = SQLite3::Database.new(db_file_path)
 
 # Views
 get '/' do
-  @artists = DB.execute("SELECT name FROM artists LIMIT 20")
+  @artists = DB.execute("SELECT * FROM artists LIMIT 20")
+  @artists_count = DB.execute("SELECT COUNT (*) FROM artists").flatten.first
+  @album_titles = DB.execute("SELECT COUNT (*) FROM albums").flatten.first
+  @songs_count = DB.execute("SELECT COUNT (*) FROM tracks").flatten.first
+  @songs_duration = DB.execute("SELECT")
   erb :index
 end
 
 get '/artists/:id' do
-  # binding.pry => params[:id]
   erb :artist
 end

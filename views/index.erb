@@ -1,11 +1,15 @@
 <h1>Home Page</h1>
-<h2>List of Artists</h2>
+<p>Welcome to the Artist's Database!</p>
+<p>This database hosts <%= @artists_count %> artists, <%= @album_titles %> albums and <%= @songs_count %> songs.</p>
+<p>This is over </p>
+<p>Displaying the first <%= @artists.size %> artists</p>
 <ul>
   <% @artists.each do |artist| %>
     <li>
       <a href="artists/<%= artist[0] %>">
-        <%= artist[0] %>
+        <%= artist[1] %>
       </a>
     </li>
   <% end %>
 </ul>
+ 
