@@ -1,7 +1,10 @@
 <h1>Home Page</h1>
 <p>Welcome to the Artist's Database!</p>
-<p>This database hosts <%= @artists_count %> artists, <%= @album_titles %> albums and <%= @songs_count %> songs.</p>
-<p>This is over </p>
+<p>
+  This database hosts <%= @artists_count %> artists, 
+  <%= @album_titles %> albums and <%= @songs_count %> songs. 
+  This is over <%= @songs_duration %> hours of music and <%= @genres_count %> different genres! 
+</p>
 <p>Displaying the first <%= @artists.size %> artists</p>
 <ul>
   <% @artists.each do |artist| %>
