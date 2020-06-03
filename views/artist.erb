@@ -1,9 +1,20 @@
 <h1> <%= @artist_name %></h1>
 <p>Quick Facts</p>
-<hr>
-<p>Album count: <%= @albums_count %></p>
-<p>Song count: <%= @songs_count %></p>
-<h3>Album list</h3>
+<ul class="list-group">
+  <li class="list-group-item">
+    <span class="badge"><%= @albums_count %></span>
+    Album count:
+  </li>
+  <li class="list-group-item">
+    <span class="badge"><%= @songs_count %></span>
+    Song count:
+  </li>
+   <li class="list-group-item">
+    <span class="badge"><%= @songs_duration %></span>
+    Song duration (total in minutes):
+  </li>
+</ul>
+
+<h3>Discography</h3>
 <ul>
-  
 </ul>

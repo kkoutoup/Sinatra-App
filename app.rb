@@ -29,12 +29,17 @@ get '/' do
 end
 
 get '/artists/:id' do
-  @artist_name = DB.execute("SELECT artists.name FROM artists WHERE id = ?", params[:id].to_i).flatten.first
+  @artist_name =  DB.execute("SELECT artists.name FROM artists WHERE id = ?", params[:id].to_i).flatten.first
   @albums_count = DB.execute("SELECT COUNT (*) FROM albums WHERE artist_id = ?", params[:id].to_i).flatten.first
-  @songs_count = DB.execute("SELECT COUNT(tracks.id), artists.name, albums.title
+  @songs_count =  DB.execute("SELECT COUNT(tracks.id)
                              FROM tracks
                              JOIN albums ON tracks.album_id = albums.id
                              JOIN artists ON albums.artist_id = artists.id
                              WHERE artists.id = ?", params[:id].to_i).flatten.first
+  @songs_duration = DB.execute("SELECT SUM(milliseconds * 1.66667e-5)
+                              FROM tracks
+                              JOIN albums ON tracks.album_id = albums.id
+                              JOIN artists ON albums.artist_id = artists.id
+                              WHERE artists.id = ?", params[:id].to_i).flatten.first.round
   erb :artist
 end
