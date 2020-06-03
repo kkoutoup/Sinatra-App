@@ -21,7 +21,7 @@ DB = SQLite3::Database.new(db_file_path)
 get '/' do
   @artists = DB.execute("SELECT * FROM artists LIMIT 20")
   @artists_count = DB.execute("SELECT COUNT (*) FROM artists").flatten.first
-  @album_titles = DB.execute("SELECT COUNT (*) FROM albums").flatten.first
+  @albums_count = DB.execute("SELECT COUNT (*) FROM albums").flatten.first
   @songs_count = DB.execute("SELECT COUNT (*) FROM tracks").flatten.first
   @songs_duration = DB.execute("SELECT SUM (tracks.milliseconds * 1.66667e-5) / 60 FROM tracks").flatten.first.round
   @genres_count = DB.execute("SELECT COUNT (*) FROM genres").flatten.first
