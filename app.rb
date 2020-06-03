@@ -4,6 +4,7 @@ require "sinatra/reloader" if development?
 require "pry-byebug"
 require "better_errors"
 require "sqlite3"
+
 # Better Errors
 configure :development do
   use BetterErrors::Middleware
@@ -11,11 +12,12 @@ configure :development do
 end
 
 # db file path
-db_file_path = File.join(File.dirname(__FILE__), "data/posts_spec.rb")
+db_file_path = File.join(File.dirname(__FILE__), "data/posts_spec.db")
 
 # create a database instance
 DB = SQLite3::Database.new(db_file_path)
 
+# Views
 get '/' do
   erb :index # view
 end
