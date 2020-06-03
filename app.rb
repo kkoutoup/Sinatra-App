@@ -31,26 +31,25 @@ end
 get '/artists/:id' do
   @artist_name =  DB.execute("SELECT artists.name FROM artists WHERE id = ?", params[:id].to_i).flatten.first
   @artist_albums_count = DB.execute("SELECT COUNT (*) FROM albums WHERE artist_id = ?", params[:id].to_i).flatten.first
-  @artist_songs_count =  DB.execute(
-                            "SELECT COUNT(tracks.id)
-                             FROM tracks
-                             JOIN albums ON tracks.album_id = albums.id
-                             JOIN artists ON albums.artist_id = artists.id
-                             WHERE artists.id = ?", params[:id].to_i).flatten.first
-  @artist_songs_duration = DB.execute(
-                             "SELECT SUM(milliseconds * 1.66667e-5)
-                              FROM tracks
-                              JOIN albums ON tracks.album_id = albums.id
-                              JOIN artists ON albums.artist_id = artists.id
-                              WHERE artists.id = ?", params[:id].to_i).flatten.first.round
-  @artist_albums = DB.execute(
-                             "SELECT albums.title, albums.id
-                              FROM albums
-                              JOIN artists ON albums.artist_id = artists.id
-                              WHERE artists.id = ?;
-                              ", params[:id].to_i)
-  @artist_genre = DB.execute(
-                             "SELECT genres.name
+
+  @artist_songs_count = DB.execute("SELECT COUNT(tracks.id)
+                                    FROM tracks
+                                    JOIN albums ON tracks.album_id = albums.id
+                                    JOIN artists ON albums.artist_id = artists.id
+                                    WHERE artists.id = ?", params[:id].to_i).flatten.first
+
+  @artist_songs_duration = DB.execute("SELECT SUM(milliseconds * 1.66667e-5)
+                                       FROM tracks
+                                       JOIN albums ON tracks.album_id = albums.id
+                                       JOIN artists ON albums.artist_id = artists.id
+                                       WHERE artists.id = ?", params[:id].to_i).flatten.first.round
+
+  @artist_albums = DB.execute("SELECT albums.title, albums.id
+                               FROM albums
+                               JOIN artists ON albums.artist_id = artists.id
+                               WHERE artists.id = ?", params[:id].to_i)
+
+  @artist_genre = DB.execute("SELECT genres.name
                               FROM genres
                               JOIN tracks ON genres.id = tracks.genre_id
                               JOIN albums ON tracks.album_id = albums.id
