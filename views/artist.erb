@@ -2,19 +2,28 @@
 <p>Quick Facts</p>
 <ul class="list-group">
   <li class="list-group-item">
-    <span class="badge"><%= @albums_count %></span>
+    <span class="badge"><%= @artist_albums_count %></span>
     Album count:
   </li>
   <li class="list-group-item">
-    <span class="badge"><%= @songs_count %></span>
+    <span class="badge"><%= @artist_songs_count %></span>
     Song count:
   </li>
    <li class="list-group-item">
-    <span class="badge"><%= @songs_duration %></span>
+    <span class="badge"><%= @artist_songs_duration %></span>
     Song duration (total in minutes):
   </li>
 </ul>
 
-<h3>Discography</h3>
-<ul>
-</ul>
+<h3>Albums</h3>
+<ol>
+  <% @artist_albums.each do |album| %>
+    <li>
+      <a href="artists/<%= album %>">
+        <%= album %>
+      </a>
+    </li>
+  <% end %>
+</ol>
+
+
