@@ -19,7 +19,7 @@ DB = SQLite3::Database.new(db_file_path)
 
 # Views
 get '/' do
-  @artists = DB.execute("SELECT * FROM artists LIMIT 20")
+  @artists = DB.execute("SELECT * FROM artists LIMIT 30")
   @artists_count = DB.execute("SELECT COUNT (*) FROM artists").flatten.first
   @albums_count = DB.execute("SELECT COUNT (*) FROM albums").flatten.first
   @songs_count = DB.execute("SELECT COUNT (*) FROM tracks").flatten.first
@@ -46,5 +46,11 @@ get '/artists/:id' do
                               JOIN artists ON albums.artist_id = artists.id
                               WHERE artists.id = ?;
                               ", params[:id].to_i).flatten
+  @artist_genre = DB.execute("SELECT genres.name
+                              FROM genres
+                              JOIN tracks ON genres.id = tracks.genre_id
+                              JOIN albums ON tracks.album_id = albums.id
+                              JOIN artists ON albums.artist_id = artists.id
+                              WHERE artists.id = ?", params[:id].to_i).flatten.first
   erb :artist
 end
