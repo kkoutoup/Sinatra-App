@@ -65,9 +65,13 @@ get '/albums/:id' do
                             JOIN artists ON albums.artist_id = artists.id
                             WHERE albums.id = ?", params[:id].to_i).flatten
 
-  @tracks_info = DB.execute("SELECT tracks.name
+  @tracks_info = DB.execute("SELECT tracks.name, tracks.id
                              FROM tracks
                              JOIN albums ON tracks.album_id = albums.id
                              WHERE albums.id = ?", params[:id].to_i)                   
   erb :album
+end
+
+get '/tracks/:id' do
+  erb :track
 end

@@ -4,7 +4,9 @@
 <ol>
   <% @tracks_info.each do |track| %>
     <li>
-        <%= track[0]%>
+      <a href="/tracks/<%= track[0] %> ">
+        <%= track[0] %>
+      </a>
       </a>
     </li>
   <% end %>
