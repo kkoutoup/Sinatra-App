@@ -1,1 +1,34 @@
-<h1> <%= params[:id] %> </h1>
+<h1> <%= @track_info[0] %> </h1>
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
+    <colgroup>
+      <col class="col-xs-1">
+      <col class="col-xs-1">
+    </colgroup>  
+    <thead>
+      <tr>
+        <th>Track Info</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Name</td>
+      <td><%= @track_info[0] %></td>
+    </tr>
+    <tr>
+      <td>Composer</td>
+      <td><%= @track_info[1] %></td>
+    </tr>
+    <tr>
+      <td>Duration (in milliseconds)</td>
+      <td><%= @track_info[2] %></td>
+    </tr>
+    <tr>
+      <td>Price</td>
+      <td><%= @track_info[3] %>£</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</ul>

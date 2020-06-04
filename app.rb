@@ -73,5 +73,8 @@ get '/albums/:id' do
 end
 
 get '/tracks/:id' do
+  @track_info = DB.execute("SELECT tracks.name, tracks.composer, 
+                                   tracks.milliseconds, tracks.unit_price
+                            FROM tracks WHERE id = ?", params[:id].to_i).flatten
   erb :track
 end
