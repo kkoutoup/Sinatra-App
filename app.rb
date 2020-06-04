@@ -30,6 +30,7 @@ end
 
 get '/artists/:id' do
   @artist_name =  DB.execute("SELECT artists.name FROM artists WHERE id = ?", params[:id].to_i).flatten.first
+
   @artist_albums_count = DB.execute("SELECT COUNT (*) FROM albums WHERE artist_id = ?", params[:id].to_i).flatten.first
 
   @artist_songs_count = DB.execute("SELECT COUNT(tracks.id)
@@ -64,5 +65,9 @@ get '/albums/:id' do
                             JOIN artists ON albums.artist_id = artists.id
                             WHERE albums.id = ?", params[:id].to_i).flatten
 
+  @tracks_info = DB.execute("SELECT tracks.name
+                             FROM tracks
+                             JOIN albums ON tracks.album_id = albums.id
+                             WHERE albums.id = ?", params[:id].to_i)                   
   erb :album
 end

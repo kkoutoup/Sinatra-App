@@ -1,3 +1,11 @@
 <h1><%= @album_info[0] %></h1>
 <p>by <%= @album_info[1] %></p>
-<p>Songs List</p>
+<p>Track List</p>
+<ol>
+  <% @tracks_info.each do |track| %>
+    <li>
+        <%= track[0]%>
+      </a>
+    </li>
+  <% end %>
+</ol>
