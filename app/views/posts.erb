@@ -1,0 +1,58 @@
+<h1>Hacker News</h1>
+<a href="#" id="submit-new-post"><strong>Submit a new post + </strong></a>
+<% if @message %>
+  <p id="update-user">
+    <%= @message %>
+  </p>
+<% end %>
+
+<form action="/" method="post" id="add-new-post-form">
+  <div class="form-group">
+    <label for="post_title">Post Title</label>
+    <input type="text" class="form-control" id="post_title" aria-describedby="post_title" placeholder="What's the post's title?" name="title">
+  </div>
+  <div class="form-group">
+    <label for="post_url">Post URL</label>
+    <input type="text" class="form-control" id="post_url" aria-describedby="post_url" placeholder="You can copy/paste the URL here" name="url">
+  </div>
+  <div class="form-group">
+    <label for="post_votes">Post Votes</label>
+    <input type="text" class="form-control" id="post_votes" aria-describedby="post_votes" placeholder="How popular is it?" name="votes">
+  </div>
+  <button type="submit" class="btn btn-primary">Add Post</button>
+</form>
+
+<p style="margin-top: 20px;">Displaying <%= @posts_count %> posts by <%= @user.username %> (<%= @user.email %>)</p>
+<ol>
+  <% @most_voted_first.each do |post| %>
+    <li>
+      <a href="<%= post.url %>" target="_blank">
+        <%= post.title %></a> - <%= post.votes %> votes
+    </li>
+  <% end %>
+</ol>
+<script>
+  const postForm = document.getElementById('add-new-post-form');
+  postForm.style.display = 'none';
+  const toggleFormLink = document.getElementById('submit-new-post');
+  toggleFormLink.addEventListener('click', toggleVisibility);
+  // show-hide form
+  function toggleVisibility(e){
+    e.preventDefault();
+    if(postForm.style.display === 'block'){
+      postForm.style.display = 'none';
+      toggleFormLink.innerHTML = "<strong>Submit a new post +</strong>";
+    }else{
+      postForm.style.display = 'block';
+      toggleFormLink.innerHTML = "<strong>Submit a new post -</strong>";
+    }
+  }
+
+  // message container
+  const updateUserPara = document.querySelector('#update-user');
+  if(updateUserPara){
+    setTimeout(function(){
+      updateUserPara.style.display = "none";
+    }, 2500 )
+  }
+</script>
