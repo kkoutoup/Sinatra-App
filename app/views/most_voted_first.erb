@@ -1,0 +1,9 @@
+<p><strong>Most Voted Posts</strong></p>
+<ol>
+  <% @most_voted_first.each do |post| %>
+    <li>
+      <a href="<%= post.url %>" target="_blank">
+        <%= post.title %></a> - <%= post.votes %> votes [published <%= post.date %>]
+    </li>
+  <% end %>
+</ol>

@@ -1,21 +1,34 @@
 require 'json'
 require 'rest-client'
+require 'faker'
+require 'time'
+require 'date'
 
 def parse_endpoint(url)
   JSON.parse(RestClient.get(url))
 end
 
-top_stories = parse_endpoint("https://hacker-news.firebaseio.com/v0/topstories.json").first(30)
+top_stories = parse_endpoint("https://hacker-news.firebaseio.com/v0/topstories.json").first(70)
 
 data = top_stories.map { |story_id| parse_endpoint("https://hacker-news.firebaseio.com/v0/item/#{story_id}.json") }
 
-users = User.create(username: data.first["by"], email: data.first["by"] + "@hackernews.com")
+# Create 10 users from Faker
+users = []
+10.times do
+  users <<  User.create(
+    username: Faker::Internet.user_name,
+    email: Faker::Internet.free_email
+  )
+end
 
-(1..30).step(1) do |n|
+# Create posts with Hacker News API - assign to users
+data.each do |item|
+  sleep(10) # fake delay so we can order by created_at later
   Post.create(
-    title: data[n]["title"],
-    url: data[n]["url"],
-    votes: data[n]["score"],
-    user_id: 1
+    title: item["title"],
+    url: item["url"],
+    votes: item["score"],
+    date: Time.now.strftime("%d-%m-%Y"),
+    user: users.sample
   )
 end

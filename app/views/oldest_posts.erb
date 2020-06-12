@@ -1,0 +1,9 @@
+<p><strong>Oldest Posts</strong></p>
+<ol>
+  <% @oldest_posts.each do |post| %>
+    <li>
+      <a href="<%= post.url %>" target="_blank">
+        <%= post.title %></a> - <%= post.votes %> votes [published <%= post.created_at %>]
+    </li>
+  <% end %>
+</ol>

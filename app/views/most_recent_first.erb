@@ -1,0 +1,9 @@
+<p><strong>Most Recent Posts</strong></p>
+<ol>
+  <% @most_recent_first.each do |post| %>
+    <li>
+      <a href="<%= post.url %>" target="_blank">
+        <%= post.title %></a> - <%= post.votes %> votes [published <%= post.created_at %>]
+    </li>
+  <% end %>
+</ol>
