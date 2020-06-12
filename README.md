@@ -8,6 +8,7 @@ Clone the repository locally. Launch the app by typing `ruby app.rb` in your ter
 App has three routes that users can access through the links on top. Users are also able to submit a new post to be added to the list.
 
 ### File structure
+```
 .app
   |_models
     |_post.rb
@@ -40,7 +41,7 @@ App has three routes that users can access through the links on top. Users are a
 .Gemfile.lock
 .Rakefile
 .README.md
-
+```
 ## Dependencies
 * Ruby 2.6
 * [Sinatra](http://sinatrarb.com/)
